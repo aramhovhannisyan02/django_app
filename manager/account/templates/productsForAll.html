@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'links' %}
+<link rel="stylesheet" href="{% static 'tables/home.css' %}">
+{% endblock %}
+
+{% block 'title' %}
+    <title>For Everybody</title> 
+{% endblock %}
+
+
+{% block 'body' %}
+    <table id="adminTable">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in products %}
+                <tr>
+                    <td>{{ i.customer }}</td>
+                    <td>{{ i.productName }}</td>
+                    <td>{{ i.productPrice }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'delete_item_all' i.id %}">
+                            {% csrf_token %}
+                            <button type="submit" id="saveButton" class="svB">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_item' i.id %}"><button id="saveButton" class="svB">Edit</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

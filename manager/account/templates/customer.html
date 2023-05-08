@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'links' %}
+
+<link rel="stylesheet" href="{% static 'tables/home.css' %}">
+
+{% endblock %}
+
+{% block 'body' %}
+    <main class="container">    
+
+        <div class="paymant">
+            <form method="post" action="{% url 'paymant' %}">
+                {% csrf_token %}
+                <label>
+                    <p style="background-color: #ccc; text-align: center;">Pay</p>
+                    <input type="number" name="debt">
+                </label>
+                <button type="submit" id="saveButton">Pay</button>
+            </form>
+        </div>
+
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Total Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in Items %}
+                {% if i.customer == request.user.username or i.customer == 'all' %}
+                    <tr>
+                        <td class="productName" id="productName-{{i.id}}">
+                            {{ i.productName }}
+                        </td>
+                        <td class="productCount">
+                            <input type="number" id="prodC" class="input{{i.id}} countInput"
+                                placeholder="count of product" value="0">
+                        </td>
+                        <td data-title='productPrice' class="productPrice">
+                            {{ i.productPrice }}
+                        </td>
+                        <td id="result-{{ i.id }}" class="totalPrice">
+                            0
+                        </td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr style="height: 60px;">
+                    <td style="border-top: 2px solid black;">
+                        <a href=""><button id="saveButton" style="height: 40px;">Clear</button></a>
+                    </td>
+                    <td style="border-top: 2px solid black;" colspan="2">
+                        <a href="{% url 'customer' %}"><button id="saveButton" onclick="saveTableData()" type="button" style="height: 40px;">SEND</button></a>
+                    </td>
+                    <td style="border-top: 2px solid black;" id="total-sum"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+
+
+    <!-- <a href="{% url 'index' %}">index</a>
+    <a href="{% url 'logout' %}"><button>Logout</button></a> -->
+{% block 'scripts' %}
+    <script src="{% static 'js/customer/saveCustomerTable.js' %}"></script>
+    <script src="{% static 'js/customer/customer.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

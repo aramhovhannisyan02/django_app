@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'links' %}
+    <link rel="stylesheet" href="{% static 'tables/home.css' %}">
+{% endblock %}
+
+
+{% block 'title' %}
+    <title>Customers</title>
+{% endblock %}
+
+{% block 'body'%}
+
+<table class="responsive-table">
+    <thead><tr><th><h1 style="text-align:center;">Customers</h1></th></tr></thead>
+    <tbody>
+        {% for customer in allCustomers %}
+        <tr>
+            <td class="toCustPage">
+                <h1>
+                <a href="{% url 'customertables' customer.id %}" class="toCustPage">{{ customer.username }}</a>---<a class="toCustPage" href="{% url 'customersDebt' customer.id %}">Debt</a><br>
+                </h1>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'links' %}
+  <link rel="stylesheet" href="{% static 'tables/responsive.css'%}">
+{% endblock %}
+
+{% block 'title' %}
+  <title>Employee Page</title>
+{% endblock%}
+
+{% block 'body' %}
+  <main class="container">
+    <table class="big-table">
+      <thead>
+        <tr>
+          <th>Products</th>
+          {% for user in BigTable %}
+            <th colspan="2" class="colspan2">{{ user.user.username }}</th>
+          {% endfor %}
+          <th class="total-column" colspan="2">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in Items %}
+          <tr>
+            <td><b>{{ item.productName }}</b></td>
+            {% for user in BigTable %}
+              <td>
+                {% for row in TableRows %}
+                  {% if row.table.user == user.user and row.product_name == item.productName and user.table == row.table%}
+                    {{ row.product_count }}
+                  {% endif %} 
+                {% endfor %}
+              </td>
+              <td id="total">
+                {% for row in TableRows %}
+                  {% if row.table.user == user.user and row.product_name == item.productName and user.table == row.table%}
+                    {{ row.total_price }}
+                  {% endif %} 
+                {% endfor %}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+  <!-- {% for table in Tables %}
+  <hr>
+      <main class="container">
+          <table class="responsive-table">
+              <thead>
+                  <tr>
+                      <th>
+                          Product
+                      </th>
+                      <th>
+                          Count
+                      </th>
+                      <th>
+                          Price
+                      </th>
+                      <th>
+                          Total Price
+                      </th>
+                  </tr>
+              </thead>
+              {% for row in TableRows %}
+                  {% if table.tableName == row.table.tableName %}
+                      <tbody>
+                          <tr>
+                              <td class="productName" id="productName-{{i.id}}">
+                                  <h3>{{ row.product_name }}</h3>
+                              </td>
+                              <td class="productCount">
+                                  <h3>{{ row.product_count }}</h3>
+
+                              </td>
+                              <td data-title='productPrice' class="productPrice">
+                                  <h3>{{ row.product_price }}</h3>
+
+                              </td>
+                              <td id="result-{{ i.id }}" class="totalPrice">
+                                  <h3>{{ row.total_price }}</h3>
+                              </td>
+                          </tr>
+                      </tbody>
+                  {% endif %}
+              {% endfor %}            
+                      <tfoot>
+                          <tr>
+                              <td>{{ table.user }}</td>
+                              <td>{{ table.dateOfCreating }}</td>
+                              <td>{{ table.timeOfCreating }}</td>
+                              <td id="total-sum"></td>
+                          </tr>
+                      </tfoot>
+          </table>
+
+      </main>
+  {% endfor %} -->
+
+
+
+
+{% endblock %}
+
+{% block 'scripts' %}
+  <script src="{% static 'tables/addRowsColumns.js'%}"></script>
+{% endblock %}

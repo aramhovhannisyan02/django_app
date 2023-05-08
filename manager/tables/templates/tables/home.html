@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'tables/home.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <main class="container">
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Total Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in Items %}
+                <tr>
+                    <td class="productName" id="productName-{{i.id}}">
+                        {{ i.productName }}
+                    </td>
+                    <td class="productCount">
+                        <input type="number" class="productCount input{{i.id}} countInput"
+                            placeholder="count of product" value="0">
+                    </td>
+                    <td data-title='productPrice' class="productPrice">
+                        {{ i.productPrice }}
+                    </td>
+                    <td id="result-{{ i.id }}" class="totalPrice">
+                        0
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Aram</td>
+                    <td>Hovhannisyan</td>
+                    <td>Kareni</td>
+                    <td id="total-sum"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <button id="saveButton" onclick="saveTableData()" type="button">Save</button>
+    </main>
+    <a href="{% url 'index' %}">index</a>
+    <script src="{% static 'tables/savetables.js' %}"></script>
+    <script src="{% static 'tables/tables.js' %}"></script>
+</body>
+
+</html>

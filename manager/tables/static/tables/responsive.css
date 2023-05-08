@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-family: helvetica;
+  }
+  
+  html, body {
+    max-width: 100vw;
+  }
+  body{
+    background-image: url(../../../media/default/background.jpg);
+
+  }
+  table {
+    background-color: white;
+    margin: auto;
+    border-spacing: 0;
+    overflow-x: auto;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+  }
+  
+  td, th {
+    min-width: 80px;
+    border: solid rgb(200, 200, 200) 1px;
+    padding: .5rem;
+  }
+  th {
+    text-align: left;
+    background-color: rgb(190, 220, 250);
+    text-transform: uppercase;
+    border-bottom: rgb(50, 50, 100) solid 2px;
+    border-top: none;
+  }
+  
+  td {
+    white-space: nowrap;
+    border-bottom: none;
+    color: rgb(20, 20, 20);
+  }
+  
+  td:first-of-type, th:first-of-type {
+    border-left: none;
+  }
+  
+  td:last-of-type, th:last-of-type {
+    border-right: none;
+  }
+table thead tr th:first-child{
+    position: sticky;
+    left: 0;
+    z-index: 2;
+
+}
+table tbody tr td:first-child{
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+    font-size: 20px;
+    color: rgb(63, 54, 54);
+}
+.colspan2{
+    text-align: center;
+}
+
+.total-row td{
+    color:red;
+    border-top: 1px solid red;
+
+}
+.total-row td:first-child{
+    border-top: 1px solid red;
+    color: red;
+}
+.total-column{
+  color: green;
+  border-left: 1px solid black;
+  text-align: center;
+}
+
+.totalcolumn-row{
+  color: green !important;
+  border-left: 1px solid black;
+}
+
+
+@media screen and (max-width:720px){
+  tbody tr :first-child{
+    font-size: 18px;
+    font-weight: normal;
+  }
+  table{
+    font-size: 14px;
+  }
+
+}
